@@ -11,17 +11,16 @@ Android pdf417 writer is based on zxing library https://github.com/zxing/zxing
   <img src="https://user-images.githubusercontent.com/26365596/185647152-31297ea9-7014-49f0-a2af-1a0c61feba08.png" alt="Android" width="200"/>
 </div>
 
-
 ## Installation
 
 ```sh
-npm install react-native-pdf417
+npm install @reeq/react-native-pdf417
 ```
 
 or
 
 ```sh
-yarn add react-native-pdf417
+yarn add @reeq/react-native-pdf417
 ```
 
 and
