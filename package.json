@@ -35,13 +35,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/Noolie/react-native-pdf417",
-  "author": "Ganas Alexander <nooolie@gmail.com> (https://github.com/Noolie)",
+  "repository": "https://github.com/reeq-dev/react-native-pdf417",
+  "author": "Ganas Alexander <nooolie@gmail.com> (https://github.com/reeq-dev)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Noolie/react-native-pdf417/issues"
+    "url": "https://github.com/reeq-dev/react-native-pdf417/issues"
   },
-  "homepage": "https://github.com/Noolie/react-native-pdf417#readme",
+  "homepage": "https://github.com/reeq-dev/react-native-pdf417#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
