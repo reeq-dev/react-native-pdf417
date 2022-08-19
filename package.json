@@ -1,5 +1,5 @@
 {
-  "name": "react-native-pdf417",
+  "name": "@reeq/react-native-pdf417",
   "version": "1.0.0",
   "description": "React-Native library which allows you to generate a barcode in pdf417 format",
   "main": "lib/commonjs/index",
