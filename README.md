@@ -33,7 +33,7 @@ pod install
 ## Usage
 
 ```js
-import { Barcode } from 'react-native-pdf417';
+import { Barcode } from '@reeq/react-native-pdf417';
 
 // ...
 
