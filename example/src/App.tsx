@@ -1,25 +1,36 @@
-import * as React from 'react';
-
-import { StyleSheet, View } from 'react-native';
-import { Pdf417View } from 'react-native-pdf417';
+import React from 'react';
+import {
+  useWindowDimensions,
+  SafeAreaView,
+  Text,
+  StyleSheet,
+} from 'react-native';
+import { Barcode } from 'react-native-pdf417';
 
 export default function App() {
+  const { width: windowWidth } = useWindowDimensions();
+
   return (
-    <View style={styles.container}>
-      <Pdf417View color="#32a852" style={styles.box} />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Barcode
+        text="hello pdf417"
+        style={{ height: windowWidth / 4, width: windowWidth }}
+      />
+      <Text style={styles.text}>[hello pdf417]</Text>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#161616',
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  text: {
+    fontSize: 24,
+    marginTop: 8,
+    color: '#ffffff',
   },
 });

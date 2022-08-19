@@ -1,26 +1,15 @@
-import {
-  requireNativeComponent,
-  UIManager,
-  Platform,
-  ViewStyle,
-} from 'react-native';
+import React from 'react';
+import { requireNativeComponent, ViewProps } from 'react-native';
 
-const LINKING_ERROR =
-  `The package 'react-native-pdf417' doesn't seem to be linked. Make sure: \n\n` +
-  Platform.select({ ios: "- You have run 'pod install'\n", default: '' }) +
-  '- You rebuilt the app after installing the package\n' +
-  '- You are not using Expo managed workflow\n';
+interface BarcodeViewNativeProps extends ViewProps {
+  text: string;
+}
 
-type Pdf417Props = {
-  color: string;
-  style: ViewStyle;
+interface BarcodeProps extends BarcodeViewNativeProps {}
+
+const BarcodeViewNative =
+  requireNativeComponent<BarcodeViewNativeProps>('BarcodeView');
+
+export const Barcode: React.FC<BarcodeProps> = ({ ...props }) => {
+  return <BarcodeViewNative {...props} />;
 };
-
-const ComponentName = 'Pdf417View';
-
-export const Pdf417View =
-  UIManager.getViewManagerConfig(ComponentName) != null
-    ? requireNativeComponent<Pdf417Props>(ComponentName)
-    : () => {
-        throw new Error(LINKING_ERROR);
-      };

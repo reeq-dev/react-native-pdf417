@@ -1,4 +1,5 @@
 package com.reactnativepdf417
+
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
@@ -11,6 +12,6 @@ class Pdf417Package : ReactPackage {
     }
 
     override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> {
-        return listOf(Pdf417ViewManager())
+        return listOf(Pdf417ViewManager(reactContext))
     }
 }
