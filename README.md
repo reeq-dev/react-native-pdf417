@@ -2,6 +2,16 @@
 
 React-Native library which allows you to generate a barcode in pdf417 format
 
+Android pdf417 writer is based on zxing library https://github.com/zxing/zxing
+
+## Screenshots
+
+<div>
+  <img src="https://user-images.githubusercontent.com/26365596/185647050-5623f0a1-00ca-4c64-a279-866ca21cfad2.png" alt="iOS" width="200"/>
+  <img src="https://user-images.githubusercontent.com/26365596/185647152-31297ea9-7014-49f0-a2af-1a0c61feba08.png" alt="Android" width="200"/>
+</div>
+
+
 ## Installation
 
 ```sh
