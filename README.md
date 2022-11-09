@@ -42,8 +42,19 @@ const { width: windowWidth } = useWindowDimensions();
 <Barcode
   text="hello pdf417"
   style={{ height: windowWidth / 4, width: windowWidth }}
+  onPress={() => {
+    console.log('barcode pressed');
+  }}
 />;
 ```
+
+## Props
+
+most of the default `View` props and:
+
+- `text`: text string you want to convert into barcode. Required
+
+- `onPress`: on barcode press event. Not required
 
 ## Contributing
 

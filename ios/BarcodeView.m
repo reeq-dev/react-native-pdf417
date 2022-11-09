@@ -8,4 +8,7 @@
 // props
 RCT_EXPORT_VIEW_PROPERTY(text, NSString)
 
+// events
+RCT_EXPORT_VIEW_PROPERTY(onBarcodePress, RCTDirectEventBlock)
+
 @end

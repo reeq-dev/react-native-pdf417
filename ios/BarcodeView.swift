@@ -1,53 +1,74 @@
 import Foundation
 import UIKit
+import React
 
 final class BarcodeView: UIView {
   
-  @objc var text: NSString = ""
+    @objc var onBarcodePress: RCTBubblingEventBlock?
+    @objc var text: NSString = ""
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-  }
-  
-  required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-  
-  override func didSetProps(_ changedProps: [String]!) {
-    self.setNeedsLayout()
+    private var gestureRecognizer: UITapGestureRecognizer?
     
-    if (changedProps.contains("text")){
-      render()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.onPress))
+        self.addGestureRecognizer(gestureRecognizer!)
     }
-  }
   
-  private func render(){
-    guard let barcode = generatePDF417Barcode(from: text as String) else {
-      return
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    subviews.forEach({ $0.removeFromSuperview() })
-    
-    let imageView = UIImageView(image: barcode)
-    imageView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-    imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    addSubview(imageView)
-  }
+    deinit {
+        if(gestureRecognizer != nil){
+            self.removeGestureRecognizer(gestureRecognizer!)
+        }
+    }
   
-  func generatePDF417Barcode(from string: String) -> UIImage? {
-      print ("generating new barcode: \(string)")
-      let data = string.data(using: String.Encoding.ascii)
+    override func didSetProps(_ changedProps: [String]!) {
+        self.setNeedsLayout()
 
-      if let filter = CIFilter(name: "CIPDF417BarcodeGenerator") {
-          filter.setValue(data, forKey: "inputMessage")
-          let transform = CGAffineTransform(scaleX: 3, y: 3)
+        if (changedProps.contains("text")){
+            render()
+        }
+    }
+  
+    @objc func onPress(sender : UITapGestureRecognizer) {
+        if sender.state == .ended {
+            onBarcodePress?([:])
+        }
+    }
+    
+    private func render(){
+        guard let barcode = generatePDF417Barcode(from: text as String) else {
+          return
+        }
 
-          if let output = filter.outputImage?.transformed(by: transform) {
-              return UIImage(ciImage: output)
-          }
-      }
+        subviews.forEach({ $0.removeFromSuperview() })
 
-      return nil
-  }
+        let imageView = UIImageView(image: barcode)
+          
+        //    self.addTarget(self, action: #selector(onBarcodePress), for: .touchUpInside)
+          
+        imageView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(imageView)
+    }
+  
+    private func generatePDF417Barcode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+
+        if let filter = CIFilter(name: "CIPDF417BarcodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 3, y: 3)
+
+            if let output = filter.outputImage?.transformed(by: transform) {
+            return UIImage(ciImage: output)
+            }
+        }
+
+        return nil
+    }
   
 }

@@ -1,27 +1,29 @@
+import { Barcode } from '@reeq/react-native-pdf417';
 import React from 'react';
-import {
-  useWindowDimensions,
-  SafeAreaView,
-  Text,
-  StyleSheet,
-} from 'react-native';
-import { Barcode } from 'react-native-pdf417';
+import { Dimensions, SafeAreaView, StyleSheet, Text } from 'react-native';
+
+const { width: windowWidth } = Dimensions.get('window');
 
 export default function App() {
-  const { width: windowWidth } = useWindowDimensions();
-
   return (
     <SafeAreaView style={styles.container}>
       <Barcode
         text="hello pdf417"
-        style={{ height: windowWidth / 4, width: windowWidth }}
+        style={styles.barcode}
+        onPress={() => {
+          console.log('barcode pressed');
+        }}
       />
-      <Text style={styles.text}>[hello pdf417]</Text>
+      <Text style={styles.text}>hello pdf417</Text>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  barcode: {
+    height: windowWidth / 4,
+    width: windowWidth,
+  },
   container: {
     backgroundColor: '#161616',
     flex: 1,
