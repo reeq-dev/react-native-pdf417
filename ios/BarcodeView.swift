@@ -41,34 +41,24 @@ final class BarcodeView: UIView {
     }
     
     private func render(){
-        guard let barcode = generatePDF417Barcode(from: text as String) else {
-          return
-        }
-
         subviews.forEach({ $0.removeFromSuperview() })
+        
+        let data = (self.text as String).data(using: String.Encoding.ascii)
+        
+        DispatchQueue.main.async {
+            if let filter = CIFilter(name: "CIPDF417BarcodeGenerator") {
+                    filter.setValue(data, forKey: "inputMessage")
+                    let transform = CGAffineTransform(scaleX: 3, y: 3)
 
-        let imageView = UIImageView(image: barcode)
-          
-        //    self.addTarget(self, action: #selector(onBarcodePress), for: .touchUpInside)
-          
-        imageView.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
-        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        addSubview(imageView)
-    }
-  
-    private func generatePDF417Barcode(from string: String) -> UIImage? {
-        let data = string.data(using: String.Encoding.ascii)
-
-        if let filter = CIFilter(name: "CIPDF417BarcodeGenerator") {
-            filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 3, y: 3)
-
-            if let output = filter.outputImage?.transformed(by: transform) {
-            return UIImage(ciImage: output)
+                    if let output = filter.outputImage?.transformed(by: transform) {
+                        let image = UIImage(ciImage: output)
+                        let imageView = UIImageView(image: image)
+                        
+                        imageView.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.height)
+                        imageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                        self.addSubview(imageView)
+                }
             }
         }
-
-        return nil
     }
-  
 }
