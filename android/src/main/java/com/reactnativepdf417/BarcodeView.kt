@@ -46,24 +46,24 @@ class BarcodeView(
     }
 
     fun render() {
-        text?.let {
+        text?.let { barcodeText ->
+            barcodeImage.setImageDrawable(null)
 
-          barcodeImage.setImageDrawable(null);
+            Thread {
+                val matrix = barcodeWriter.encode(barcodeText, BarcodeFormat.PDF_417, matrixWidth, matrixHeight)
+                val bitmap: Bitmap = Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.ARGB_8888)
 
-          themedReactContext.currentActivity?.runOnUiThread {
+                for (x in 0 until matrix.width) {
+                    for (y in 0 until matrix.height) {
+                        val color = if (matrix.get(x, y)) resources.getColor(R.color.black) else resources.getColor(R.color.white)
+                        bitmap.setPixel(x, y, color)
+                    }
+                }
 
-            val matrix = barcodeWriter.encode(it, BarcodeFormat.PDF_417, matrixWidth, matrixHeight)
-            val bitmap: Bitmap = Bitmap.createBitmap(matrix.width, matrix.height, Bitmap.Config.ARGB_8888)
-
-            for (x in 0 until matrix.width) {
-              for (y in 0 until matrix.height) {
-                val color = if (matrix.get(x, y)) resources.getColor(R.color.black) else resources.getColor(R.color.white)
-                bitmap.setPixel(x, y, color)
-              }
-            }
-
-            barcodeImage.setImageBitmap(bitmap)
-          }
+                themedReactContext.currentActivity?.runOnUiThread {
+                    barcodeImage.setImageBitmap(bitmap)
+                }
+            }.start()
         }
     }
 
