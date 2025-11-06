@@ -1,8 +1,13 @@
 # react-native-pdf417
 
-React-Native library which allows you to generate a barcode in pdf417 format
+React-Native library which allows you to generate a barcode in pdf417 format.
 
 Android pdf417 writer is based on zxing library https://github.com/zxing/zxing
+
+## Compatibility
+
+- **v1.0.6** — compatible with both the old and the new React Native architectures
+- **v2.0.0 and above** — compatible **only with the new architecture**
 
 ## Screenshots
 
@@ -34,31 +39,27 @@ pod install
 
 ```js
 import { Barcode } from '@reeq/react-native-pdf417';
-
-// ...
+import { useWindowDimensions } from 'react-native';
 
 const { width: windowWidth } = useWindowDimensions();
 
 <Barcode
   text="hello pdf417"
   style={{ height: windowWidth / 4, width: windowWidth }}
-  onPress={() => {
-    console.log('barcode pressed');
-  }}
 />;
 ```
 
 ## Props
 
-most of the default `View` props and:
+Supports most of the default `View` props and:
 
-- `text`: text string you want to convert into barcode. Required
-
-- `onPress`: on barcode press event. Not required
+- `text` — text string you want to convert into a barcode (**required**)
 
 ## Contributing
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+- [Development workflow](CONTRIBUTING.md#development-workflow)
+- [Sending a pull request](CONTRIBUTING.md#sending-a-pull-request)
+- [Code of conduct](CODE_OF_CONDUCT.md)
 
 ## License
 
