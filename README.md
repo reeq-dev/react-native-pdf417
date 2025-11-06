@@ -38,15 +38,15 @@ pod install
 ## Usage
 
 ```js
-import { Barcode } from '@reeq/react-native-pdf417';
+import { Pdf417View } from '@reeq/react-native-pdf417';
 import { useWindowDimensions } from 'react-native';
 
 const { width: windowWidth } = useWindowDimensions();
 
-<Barcode
+<Pdf417View
   text="hello pdf417"
   style={{ height: windowWidth / 4, width: windowWidth }}
-/>;
+/>
 ```
 
 ## Props
