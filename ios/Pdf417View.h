@@ -1,6 +1,5 @@
 #import <React/RCTViewComponentView.h>
 #import <UIKit/UIKit.h>
-#import "Pdf417-Swift.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

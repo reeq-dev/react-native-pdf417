@@ -1,5 +1,12 @@
 #import "Pdf417View.h"
 
+// With use_frameworks! the generated Swift header lives inside Pdf417.framework.
+#if __has_include(<Pdf417/Pdf417-Swift.h>)
+#import <Pdf417/Pdf417-Swift.h>
+#else
+#import "Pdf417-Swift.h"
+#endif
+
 #import <react/renderer/components/Pdf417ViewSpec/ComponentDescriptors.h>
 #import <react/renderer/components/Pdf417ViewSpec/EventEmitters.h>
 #import <react/renderer/components/Pdf417ViewSpec/Props.h>
